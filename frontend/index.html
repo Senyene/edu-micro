@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduMicro - Learn Without Limits</title>
+    <meta name="description" content="EduMicro - Modern educational platform with microservices architecture">
+    <meta name="keywords" content="education, learning, online courses, microservices">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">EduMicro</div>
+            <ul class="nav-links">
+                <li><a href="#" data-section="home">Home</a></li>
+                <li><a href="#" data-section="about">About</a></li>
+                <li><a href="#" data-section="features">Features</a></li>
+                <li><a href="pages/login.html" class="login-btn">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Transform Your Learning Journey</h1>
+            <p class="hero-subtitle">
+                <span id="typewriter"></span><span class="cursor">|</span>
+            </p>
+            <div class="cta-buttons">
+                <button onclick="startLearning()" class="btn-primary">Start Learning</button>
+                <button onclick="exploreCourses()" class="btn-secondary">Explore Courses</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="10000">0</span>
+                    <span class="stat-label">Students</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="500">0</span>
+                    <span class="stat-label">Courses</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="50">0</span>
+                    <span class="stat-label">Expert Teachers</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="features" class="features">
+        <h2>Why Choose EduMicro?</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Microservices Architecture</h3>
+                <p>Built with modern SRE principles for 99.9% uptime and easy scaling</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🔒</div>
+                <h3>Enterprise Security</h3>
+                <p>JWT-based authentication with encrypted data transmission</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Real-time Analytics</h3>
+                <p>Track your learning progress with detailed performance metrics</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">☁️</div>
+                <h3>Cloud Native</h3>
+                <p>Docker containers with CI/CD pipeline for zero-downtime deployments</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2024 EduMicro. Built with ❤️ for SRE demonstration</p>
+    </footer>
+    
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

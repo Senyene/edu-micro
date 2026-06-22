@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - EduMicro</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .profile-container { min-height: 100vh; padding: 6rem 2rem 2rem; max-width: 800px; margin: 0 auto; }
+        .profile-card { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 2rem; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.2); }
+        .profile-header { display: flex; align-items: center; gap: 2rem; }
+        .avatar { width: 100px; height: 100px; border-radius: 50%; background: var(--primary-color); display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+        .user-details h2 { margin-bottom: 0.5rem; }
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .stat-card { background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 10px; text-align: center; }
+        .stat-card .number { font-size: 2rem; font-weight: bold; color: var(--primary-color); }
+        .logout-btn { background: var(--accent-color); color: white; border: none; padding: 0.8rem 2rem; border-radius: 25px; cursor: pointer; margin-top: 2rem; }
+    </style>
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">EduMicro</div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="#" class="login-btn" onclick="authManager.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="avatar" id="avatarInitial">U</div>
+                <div class="user-details">
+                    <h2 id="profileName">User Name</h2>
+                    <p id="profileEmail">email@example.com</p>
+                    <p>Member since: <span id="memberSince">-</span></p>
+                </div>
+            </div>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="number" id="coursesEnrolled">0</div>
+                    <div>Courses Enrolled</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="assignmentsDone">0</div>
+                    <div>Assignments Done</div>
+                </div>
+                <div class="stat-card">
+                    <div class="number" id="avgGrade">-</div>
+                    <div>Average Grade</div>
+                </div>
+            </div>
+            <button class="logout-btn" onclick="authManager.logout()">Logout</button>
+        </div>
+    </div>
+    <script src="../js/particles.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = authManager.getCurrentUser();
+            if (user) {
+                document.getElementById('profileName').textContent = user.name || user.email;
+                document.getElementById('profileEmail').textContent = user.email;
+                document.getElementById('avatarInitial').textContent = (user.name || user.email)[0].toUpperCase();
+                document.getElementById('memberSince').textContent = new Date(user.createdAt || Date.now()).toLocaleDateString();
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+    </script>
+</body>
+</html>
