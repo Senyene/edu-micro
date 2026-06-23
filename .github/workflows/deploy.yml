@@ -19,18 +19,21 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install dependencies
+
+      - name: Set service directory
+        id: dir
         run: |
-          if [ -d "backend/${{ matrix.service }}" ]; then
-            cd backend/${{ matrix.service }} && npm ci
+          if [ "${{ matrix.service }}" = "api-gateway" ]; then
+            echo "path=backend/api-gateway" >> $GITHUB_OUTPUT
           else
-            echo "Skipping ${{ matrix.service }} – folder not found"
+            echo "path=backend/microservices/${{ matrix.service }}" >> $GITHUB_OUTPUT
           fi
+
+      - name: Install dependencies
+        run: cd ${{ steps.dir.outputs.path }} && npm ci
+
       - name: Run tests (if any)
-        run: |
-          if [ -d "backend/${{ matrix.service }}" ]; then
-            cd backend/${{ matrix.service }} && npm test || true
-          fi
+        run: cd ${{ steps.dir.outputs.path }} && npm test || true
 
   build:
     name: Build and Push Docker Images
@@ -42,16 +45,28 @@ jobs:
         service: [api-gateway, user-service, course-service, assignment-service, grade-service, notification-service]
     steps:
       - uses: actions/checkout@v4
+
+      - name: Set Docker context path
+        id: context
+        run: |
+          if [ "${{ matrix.service }}" = "api-gateway" ]; then
+            echo "context=backend/api-gateway" >> $GITHUB_OUTPUT
+          else
+            echo "context=backend/microservices/${{ matrix.service }}" >> $GITHUB_OUTPUT
+          fi
+
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          context: ./backend/${{ matrix.service }}
+          context: ${{ steps.context.outputs.context }}
           push: true
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/edumicro-${{ matrix.service }}:latest
             ${{ secrets.DOCKER_USERNAME }}/edumicro-${{ matrix.service }}:${{ github.sha }}
+
   deploy:
     name: Deploy Frontend to GitHub Pages
     runs-on: ubuntu-latest
