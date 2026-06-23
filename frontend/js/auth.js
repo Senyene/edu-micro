@@ -1,6 +1,6 @@
 class AuthManager {
     constructor() {
-        this.apiUrl = 'http://localhost:3000/api';
+        this.apiUrl = 'https://edumicro-api-gateway.onrender.com/api';
         this.tokenKey = 'edumicro_token';
         this.userKey = 'edumicro_user';
         this.checkAuth();
