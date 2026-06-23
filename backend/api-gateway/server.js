@@ -11,11 +11,11 @@ const PORT = process.env.PORT || 3000;
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
 
 const SERVICES = {
-    user: 'http://localhost:3001',
-    course: 'http://localhost:3002',
-    assignment: 'http://localhost:3003',
-    grade: 'http://localhost:3004',
-    notification: 'http://localhost:3005'
+    user: 'https://edumicro-user-service.onrender.com',
+    course: 'https://edumicro-course-service.onrender.com',
+    assignment: 'https://edumicro-assignment-service.onrender.com',
+    grade: 'https://edumicro-grade-service.onrender.com',
+    notification: 'https://edumicro-notification-service.onrender.com'
 };
 
 app.use(helmet());
