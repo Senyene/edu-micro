@@ -1,7 +1,5 @@
 # EduMicro – Educational Microservices Platform
 A lightweight, production‑ready educational platform built to demonstrate modern **SRE & DevOps** practices. The application is composed of a vanilla JavaScript frontend, an API gateway, and five independent microservices, all deployed on free cloud infrastructure.
-![Landing Page](https://raw.githubusercontent.com/Senyene/edu-micro/main/screenshots/landing.png)
-*Landing page with dynamic particle background*
 
 ## 📋 Table of Contents
 - [Architecture](#architecture)
